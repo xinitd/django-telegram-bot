@@ -47,7 +47,7 @@ File `core/views.py` contain two views. First view needed for setting Webhooks t
 
 - Get token from [@BotFather](https://t.me/BotFather) and insert in `backend/settings.yaml` file (TELEGRAM_TOKEN) section
 
-- Enter your domain name in `backend/settings.yaml` (ALLOWED_HOSTS and WEBHOOK_HOST)
+- Enter your domain name in `backend/settings.yaml` (WEBHOOK_HOST)
 
 - Uncomment `# bot.infinity_polling()` line in `core/bot.py` file
 
@@ -77,7 +77,7 @@ File `core/views.py` contain two views. First view needed for setting Webhooks t
 
 - Get token from [@BotFather](https://t.me/BotFather) and insert in `backend/settings.yaml` file (TELEGRAM_TOKEN) section
 
-- Enter your domain name in `backend/settings.yaml` (ALLOWED_HOSTS and WEBHOOK_HOST)
+- Enter your domain name in `backend/settings.yaml` (WEBHOOK_HOST)
 
 - Create socket file `sudo nano /etc/systemd/system/mytelegrambot.socket`:
 
@@ -173,7 +173,7 @@ server {
 
 - Get token from [@BotFather](https://t.me/BotFather) and insert in `backend/settings.yaml` file (TELEGRAM_TOKEN) section
 
-- Enter your domain name in `backend/settings.yaml` (ALLOWED_HOSTS and WEBHOOK_HOST)
+- Enter your domain name in `backend/settings.yaml` (WEBHOOK_HOST)
 
 - Edit `nginx/default.conf` file and change `mytelegrambot.mydomain.com` to your domain
 

@@ -29,7 +29,7 @@ SECRET_KEY = settings['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = settings['DEBUG']
 
-ALLOWED_HOSTS = settings['ALLOWED_HOSTS']
+ALLOWED_HOSTS = settings['ALLOWED_HOSTS'].append(settings['WEBHOOK_HOST'])
 
 # Application definition
 
