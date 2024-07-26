@@ -7,7 +7,9 @@
   <p>
     <a href="#development">Development</a>
     ·
-    <a href="#deployment-production-usage-with-webhooks-in-debian-based-distros">Deployment</a>
+    <a href="#deployment-production-usage-with-webhooks-in-debian-based-distros">Deployment in Debian</a>
+    ·
+    <a href="#docker-deployment">Docker deployment</a>
   </p>
 </div>
 
@@ -41,9 +43,11 @@ File `core/views.py` contain two views. First view needed for setting Webhooks t
 
 - Create settings from template: `cp backend/settings.template.yaml backend/settings.yaml`
 
-- Generate django secret key
+- Generate django secret key and insert in `backend/settings.yaml`
 
 - Get token from [@BotFather](https://t.me/BotFather) and insert in `backend/settings.yaml` file (TELEGRAM_TOKEN) section
+
+- Enter your domain name in `backend/settings.yaml` (ALLOWED_HOSTS and WEBHOOK_HOST)
 
 - Uncomment `# bot.infinity_polling()` line in `core/bot.py` file
 
@@ -69,9 +73,11 @@ File `core/views.py` contain two views. First view needed for setting Webhooks t
 
 - Create settings from template: `cp backend/settings.template.yaml backend/settings.yaml`
 
-- Generate django secret key
+- Generate django secret key and insert in `backend/settings.yaml`
 
 - Get token from [@BotFather](https://t.me/BotFather) and insert in `backend/settings.yaml` file (TELEGRAM_TOKEN) section
+
+- Enter your domain name in `backend/settings.yaml` (ALLOWED_HOSTS and WEBHOOK_HOST)
 
 - Create socket file `sudo nano /etc/systemd/system/mytelegrambot.socket`:
 
@@ -148,3 +154,31 @@ server {
 - Open `mytelegrambot.mydomain.com` url in browser
 
 - Now send `/start` message to your bot
+
+<div align="center">
+  <h2>Docker deployment</h2>
+</div>
+
+- Install Docker in your OS
+
+- Install Git and Certbot: `sudo apt install git certbot -y`
+
+- Clone repo: `git clone https://github.com/xinitd/django-telegram-bot.git`
+
+- Enter in project directory: `cd django-telegram-bot`
+
+- Create settings from template: `cp backend/settings.template.yaml backend/settings.yaml`
+
+- Generate django secret key and insert in `backend/settings.yaml`
+
+- Get token from [@BotFather](https://t.me/BotFather) and insert in `backend/settings.yaml` file (TELEGRAM_TOKEN) section
+
+- Enter your domain name in `backend/settings.yaml` (ALLOWED_HOSTS and WEBHOOK_HOST)
+
+- Edit `nginx/default.conf` file and change `mytelegrambot.mydomain.com` to your domain
+
+- Generate new certificate and key for your domain: `sudo certbot certonly --standalone -d djangotelegramdemobot.args.tech`
+
+- Copy certificate and key in `nginx/` path: `sudo cp /etc/letsencrypt/live/mytelegrambot.mydomain.com/fullchain.pem /etc/letsencrypt/live/mytelegrambot.mydomain.com/privkey.pem nginx/`
+
+- Run: `docker compose up -d`

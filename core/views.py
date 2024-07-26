@@ -10,7 +10,7 @@ import telebot
 @api_view(['GET'])
 def set_webhook(request):
     bot.remove_webhook()
-    bot.set_webhook(url=request.build_absolute_uri() + settings['TELEGRAM_TOKEN'])
+    bot.set_webhook(url='https://' + settings['WEBHOOK_HOST'] + ':443/' + settings['TELEGRAM_TOKEN'])
     return Response('')
 
 

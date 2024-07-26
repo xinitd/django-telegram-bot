@@ -7,3 +7,4 @@ ALLOWED_HOSTS:
   - 0.0.0.0
   - mytelegrambot.mydomain.com
 TELEGRAM_TOKEN: ''
+WEBHOOK_HOST: 'mytelegrambot.mydomain.com'
