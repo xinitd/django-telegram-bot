@@ -1,17 +1,8 @@
-from backend.settings import settings
 import json
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .bot import bot
 import telebot
-
-
-@api_view(['GET'])
-def set_webhook(request):
-    bot.remove_webhook()
-    bot.set_webhook(url='https://' + settings['WEBHOOK_HOST'] + ':443/' + settings['TELEGRAM_TOKEN'])
-    return Response('')
+from .bot import bot
 
 
 @api_view(['POST'])

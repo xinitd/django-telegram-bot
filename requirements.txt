@@ -2,4 +2,5 @@ django
 djangorestframework
 gunicorn
 pyTelegramBotAPI
-pyyaml
+python-dotenv
+psycopg2-binary
