@@ -35,57 +35,59 @@ Why Django? It's a powerful and customizable framework. In this project, Django 
 
 This guide helps you to set up a local environment for development using polling mode.
 
-- Prerequisites:
+1. Preparation:
 
-  - Install Git, Python 3.10+, and venv.
+    - Install Git, Python 3.10+, and venv.
 
-    ```
-    sudo apt install git python3 python3-venv -y
-    ```
+      ```
+      sudo apt install git python3 python3-venv -y
+      ```
 
-  - Get the project:
+    - Get the project:
 
-    ```
-    git clone https://github.com/xinitd/django-telegram-bot.git
-    cd django-telegram-bot
-    ```
+      ```
+      git clone https://github.com/xinitd/django-telegram-bot.git
+      cd django-telegram-bot
+      ```
 
-  - Set up virtual environment:
+2. Environment setup:
 
-    ```
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+    - Set up virtual environment:
 
-  - Install requirements:
+      ```
+      python3 -m venv venv
+      source venv/bin/activate
+      ```
 
-    ```
-    pip install -r requirements.txt
-    ```
+    - Install requirements:
 
-  - Configure settings:
+      ```
+      pip install -r requirements.txt
+      ```
 
-      - Create your local environment file:
+    - Create your local environment file:
 
-        ```
-        cp .env.template .env
-        ```
+      ```
+      cp .env.template .env
+      ```
 
-      - Open the `.env` file and fill in your `SECRET_KEY` and `TELEGRAM_TOKEN`.
+      *Open the `.env` file and fill in your `SECRET_KEY` and `TELEGRAM_TOKEN`.*
 
-  - Apply database migrations:
+    - Apply database migrations:
 
-    ```
-    python manage.py migrate
-    ```
+      ```
+      python manage.py migrate
+      ```
 
-  - Run the bot:
+3. Run and test:
 
-    ```
-    python manage.py runbot
-    ```
+    - Run the bot:
 
-  - Send the `/start` command to your bot in Telegram.
+      ```
+      python manage.py runbot
+      ```
+
+    - Send the `/start` command to your bot in Telegram.
 
 <hr>
 
@@ -95,13 +97,13 @@ This guide helps you to set up a local environment for development using polling
 
 This guide provides an automated way to deploy the bot using Docker, PostgreSQL, Nginx, and Let's Encrypt for SSL.
 
-1. Prerequisites
+1. Prerequisites:
 
     - A server (VPS) with a clean OS (e.g., Ubuntu 22.04).
 
     - A domain name pointing to your server's IP address.
 
-2. Installation
+2. Installation:
 
     - Clone the project:
 
