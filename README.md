@@ -84,7 +84,7 @@ This guide helps you to set up a local environment for development using polling
     - Run the bot:
 
       ```
-      python manage.py runbot
+      python manage.py bot
       ```
 
     - Send the `/start` command to your bot in Telegram.
