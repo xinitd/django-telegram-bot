@@ -1,0 +1,57 @@
+services:
+
+  database:
+    image: postgres:15-alpine
+    container_name: database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_HOST: database
+      POSTGRES_DB: django_telegram_bot
+      POSTGRES_USER: bot
+      POSTGRES_PASSWORD: password
+    env_file: .env
+    networks:
+      - internal_network
+
+  backend:
+    container_name: backend
+    build:
+      context: .
+    expose:
+      - '8000'
+    env_file: .env
+    depends_on:
+      - database
+    networks:
+      - internal_network
+    volumes:
+      - ./staticfiles:/app/staticfiles
+
+  webserver:
+    container_name: webserver
+    image: nginx
+    env_file: .env
+    depends_on:
+      - backend
+    networks:
+      - internal_network
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+      - ./nginx/certs:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
+      - ./staticfiles:/var/www/static/
+    ports:
+      - '80:80'
+      - '443:443'
+    command: /bin/sh -c 'envsubst < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g "daemon off;"'
+
+networks:
+  internal_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16
+
+volumes:
+  postgres_data:
