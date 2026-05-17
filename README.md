@@ -5,7 +5,7 @@
 **Deploy a Django + Telegram bot to production in one command** - with webhooks, Docker, PostgreSQL, Nginx and Let's Encrypt SSL.
 
 ![Python](https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/django-5.x-092E20?style=flat-square&logo=django&logoColor=white)
+![Django](https://img.shields.io/badge/django-5.2_LTS-092E20?style=flat-square&logo=django&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![License](https://img.shields.io/github/license/xinitd/django-telegram-bot?style=flat-square)
 ![Last commit](https://img.shields.io/github/last-commit/xinitd/django-telegram-bot?style=flat-square&color=green)
@@ -44,7 +44,7 @@ Run the bot locally in **long polling mode** - no public IP, no SSL, no webhook 
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.10 – 3.13
 - Git
 - A Telegram bot token - get one from [@BotFather](https://t.me/BotFather) in under a minute.
 
