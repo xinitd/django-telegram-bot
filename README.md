@@ -86,8 +86,6 @@ docker run -d --name postgres-dev \
   postgres:15-alpine
 ​```
 
-In your `.env`, set `POSTGRES_HOST=localhost` and `POSTGRES_PASSWORD=devpassword`.
-
 Apply database migrations:
 
 ```bash
