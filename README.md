@@ -151,3 +151,18 @@ docker compose exec backend python manage.py collectstatic --no-input
 Send `/start` to your bot - you should get an instant reply, this time over webhooks instead of polling.
 
 ---
+
+## Related projects
+
+- **[Hypoxia](https://github.com/xinitd/hypoxia)** - forensic CLI for safe data collection from compromised or failing systems. SHA-256 manifests, chain-of-custody logging, checkpoint/resume.
+- **[args.tech](https://args.tech)** - my personal blog with hands-on DevOps, Python and Linux tutorials.
+
+## License
+
+Released under the [MIT License](LICENSE).
+
+---
+
+Built by **[@xinitd](https://github.com/xinitd)** · Astana, Kazakhstan
+
+If this template saved you a few hours - a ⭐ on GitHub means a lot.
