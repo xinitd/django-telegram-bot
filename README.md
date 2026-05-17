@@ -1,17 +1,19 @@
-<div align="center">
+![Telegram logo](assets/telegram.png)
 
-  <img src="assets/telegram.png" alt="Telegram logo">
+## Telegram bot with Webhooks
 
-  <h2>Telegram bot with Webhooks</h2>
+**Deploy a Django + Telegram bot to production in one command** - with webhooks, Docker, PostgreSQL, Nginx and Let's Encrypt SSL.
 
-  <p>
-    <a href="#about">About project</a>
-    ·
-    <a href="#dev">Setup DEV environment</a>
-    ·
-    <a href="#production">PRODUCTION deployment</a>
-  </p>
-</div>
+![Python](https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/django-5.x-092E20?style=flat-square&logo=django&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white)
+![License](https://img.shields.io/github/license/xinitd/django-telegram-bot?style=flat-square)
+![Last commit](https://img.shields.io/github/last-commit/xinitd/django-telegram-bot?style=flat-square&color=green)
+![Stars](https://img.shields.io/github/stars/xinitd/django-telegram-bot?style=flat-square)
+
+[About](#about) · [Setup DEV environment](#dev) · [PRODUCTION deployment](#production)
+
+---
 
 ## About
 
