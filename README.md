@@ -72,8 +72,8 @@ cp .env.template .env
 
 Open `.env` and fill in:
 
-- `SECRET_KEY` — any random string (generate with `python -c "import secrets; print(secrets.token_urlsafe(50))"`)
-- `TELEGRAM_TOKEN` — the token from @BotFather
+- `SECRET_KEY` - any random string (generate with `python -c "import secrets; print(secrets.token_urlsafe(50))"`)
+- `TELEGRAM_TOKEN` - the token from @BotFather
 
 Apply database migrations:
 
