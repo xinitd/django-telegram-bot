@@ -38,70 +38,58 @@ Django brings a powerful admin panel and a battle-tested ORM out of the box. Her
 - **Production-ready by default** - separate Dockerfile, `.env`-driven config, static via `collectstatic`, HTTPS-only.
 - **DEV mode included** - switch to long polling locally with `python manage.py bot` without touching production setup.
 
-<hr>
+## DEV
 
-<div align="center">
-  <h2>DEV</h2>
-</div>
+Run the bot locally in **long polling mode** - no public IP, no SSL, no webhook setup required. Ideal for development, debugging and testing new commands before deploying to production.
 
-This guide helps you to set up a local environment for development using polling mode.
+### Prerequisites
 
-1. Preparation:
+- Python 3.10+
+- Git
+- A Telegram bot token - get one from [@BotFather](https://t.me/BotFather) in under a minute.
 
-    - Install Git, Python 3.10+, and venv.
+### 1. Clone the repository
 
-      ```
-      sudo apt install git python3 python3-venv -y
-      ```
+```bash
+sudo apt install git python3 python3-venv -y    # Ubuntu / Debian
+git clone https://github.com/xinitd/django-telegram-bot.git
+cd django-telegram-bot
+```
 
-    - Get the project:
+### 2. Set up the Python virtual environment
 
-      ```
-      git clone https://github.com/xinitd/django-telegram-bot.git
-      cd django-telegram-bot
-      ```
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
-2. Environment setup:
+### 3. Configure environment variables
 
-    - Set up virtual environment:
+```bash
+cp .env.template .env
+```
 
-      ```
-      python3 -m venv venv
-      source venv/bin/activate
-      ```
+Open `.env` and fill in:
 
-    - Install requirements:
+- `SECRET_KEY` — any random string (generate with `python -c "import secrets; print(secrets.token_urlsafe(50))"`)
+- `TELEGRAM_TOKEN` — the token from @BotFather
 
-      ```
-      pip install -r requirements.txt
-      ```
+Apply database migrations:
 
-    - Create your local environment file:
+```bash
+python manage.py migrate
+```
 
-      ```
-      cp .env.template .env
-      ```
+### 4. Run the bot
 
-      *Open the `.env` file and fill in your `SECRET_KEY` and `TELEGRAM_TOKEN`.*
+```bash
+python manage.py bot
+```
 
-    - Apply database migrations:
+Send `/start` to your bot in Telegram - it should reply immediately. If nothing happens, double-check `TELEGRAM_TOKEN` and that the bot is started (not paused) in @BotFather.
 
-      ```
-      python manage.py migrate
-      ```
-
-3. Run and test:
-
-    - Run the bot:
-
-      ```
-      python manage.py bot
-      ```
-
-    - Send the `/start` command to your bot in Telegram.
-
-<hr>
-
+---
 <div align="center">
   <h2>PRODUCTION</h2>
 </div>
