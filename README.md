@@ -4,7 +4,7 @@
 
 **Deploy a Django + Telegram bot to production in one command** - with webhooks, Docker, PostgreSQL, Nginx and Let's Encrypt SSL.
 
-![Python](https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/python-3.10--3.13-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/django-5.2_LTS-092E20?style=flat-square&logo=django&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![License](https://img.shields.io/github/license/xinitd/django-telegram-bot?style=flat-square)
