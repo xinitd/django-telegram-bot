@@ -86,6 +86,10 @@ docker run -d --name postgres-dev \
   postgres:15-alpine
 ```
 
+In your `.env`, set:
+- `POSTGRES_HOST=localhost` - so Django connects to the postgres-dev container via the host port, not the docker network.
+- `POSTGRES_PASSWORD=devpassword` - to match the password you set when starting the postgres-dev container.
+
 Apply database migrations:
 
 ```bash
