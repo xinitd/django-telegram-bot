@@ -13,19 +13,28 @@
   </p>
 </div>
 
-<div align="center">
-  <h2>ABOUT</h2>
-</div>
+## About
 
-A template for creating a Telegram bot using the Django web framework and [`pyTelegramBotAPI`](https://github.com/eternnoir/pyTelegramBotAPI.git). This project is designed for a robust, production-ready deployment using Docker and Webhooks.
+**Production-ready Django + Telegram bot template** with webhooks, Docker, PostgreSQL, Nginx and Let's Encrypt SSL. Deploy a fully working bot to a fresh VPS with a single command.
 
-Why Django? It's a powerful and customizable framework. In this project, Django is used for setting up Webhooks via its admin panel and processing updates from Telegram's servers. It can also be easily extended to store data in a database and create complex user interactions.
+Built on top of Django and [`pyTelegramBotAPI`](https://github.com/eternnoir/pyTelegramBotAPI), this template solves the most painful part of going from a local Telegram bot tutorial to a real deployment - switching from long polling to webhooks, managing SSL certificates, and running the bot behind a reverse proxy.
 
-**Features:**
-* **Django Admin Integration:** Manage bot settings and actions directly from the admin panel.
-* **Webhook Ready:** Built from the ground up to work with Telegram Webhooks.
-* **Dockerized:** Comes with a `docker-compose.yml` for easy and reproducible deployment.
-* **Scalable Handler Architecture:** Bot command handlers are split into modules for easy extension.
+### Why Django?
+
+Django brings a powerful admin panel and a battle-tested ORM out of the box. Here it's used to:
+
+- register, inspect and delete Telegram webhooks straight from the Django admin (no curl scripts);
+- store users, messages and bot state in PostgreSQL;
+- extend the bot with custom Django apps, views and APIs as the project grows.
+
+### Features
+
+- **Webhook-first architecture** - no polling, no extra daemons. Telegram updates arrive as standard Django requests.
+- **Django Admin integration** - set, inspect and delete the Telegram webhook from a dropdown action.
+- **One-command deployment** - `install.sh` provisions Docker, PostgreSQL, Nginx and a Let's Encrypt SSL certificate.
+- **Modular handler architecture** - each command lives in its own module and is auto-registered.
+- **Production-ready by default** - separate Dockerfile, `.env`-driven config, static via `collectstatic`, HTTPS-only.
+- **DEV mode included** - switch to long polling locally with `python manage.py bot` without touching production setup.
 
 <hr>
 
