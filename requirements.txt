@@ -1,6 +1,17 @@
-django
-djangorestframework
-gunicorn
-pyTelegramBotAPI
-python-dotenv
-psycopg2-binary
+# Django LTS — security support until April 2028
+django>=5.2,<6.0
+
+# REST framework (for future API extensions)
+djangorestframework>=3.15,<4.0
+
+# WSGI server for production
+gunicorn>=23.0,<24.0
+
+# Telegram Bot API wrapper
+pyTelegramBotAPI>=4.20,<5.0
+
+# Environment variables from .env
+python-dotenv>=1.0,<2.0
+
+# PostgreSQL database adapter
+psycopg2-binary>=2.9,<3.0
