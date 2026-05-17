@@ -130,7 +130,7 @@ chmod +x install.sh
 sudo ./install.sh
 ```
 
-The script installs Docker, brings up the `backend`, `db` and `nginx` containers, and issues an SSL certificate via Let's Encrypt.
+The script installs Docker, brings up the `backend`, `database` and `webserver` containers, and issues an SSL certificate via Let's Encrypt.
 
 ### 4. Initialize the Django backend
 
