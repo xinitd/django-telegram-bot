@@ -32,7 +32,7 @@ Django brings a powerful admin panel and a battle-tested ORM out of the box. Her
 ### Features
 
 - **Webhook-first architecture** - no polling, no extra daemons. Telegram updates arrive as standard Django requests.
-- **Secure webhook management** - register, inspect and delete the Telegram webhook from the Django admin, behind authentication. No public setWebhook endpoint, no token in URLs.
+- **Secure webhook management** - register, inspect and delete the Telegram webhook from the Django admin, behind authentication. No public `setWebhook` endpoint, no token in URLs.
 - **One-command deployment** - `install.sh` provisions Docker, PostgreSQL, Nginx and a Let's Encrypt SSL certificate.
 - **Modular handler architecture** - each command lives in its own module and is auto-registered.
 - **Production-ready by default** - separate Dockerfile, `.env`-driven config, static via `collectstatic`, HTTPS-only.
