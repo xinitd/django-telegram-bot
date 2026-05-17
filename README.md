@@ -50,7 +50,7 @@ Run the bot locally in **long polling mode** - no public IP, no SSL, no webhook 
 
 ### Prerequisites
 
-- Python 3.10 – 3.13
+- Python 3.10 - 3.13
 - Git
 - A Telegram bot token - get one from [@BotFather](https://t.me/BotFather) in under a minute.
 
