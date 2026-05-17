@@ -75,6 +75,19 @@ Open `.env` and fill in:
 - `SECRET_KEY` - any random string (generate with `python -c "import secrets; print(secrets.token_urlsafe(50))"`)
 - `TELEGRAM_TOKEN` - the token from @BotFather
 
+Start a local PostgreSQL container in a separate terminal:
+
+​```bash
+docker run -d --name postgres-dev \
+  -e POSTGRES_DB=django_telegram_bot \
+  -e POSTGRES_USER=bot \
+  -e POSTGRES_PASSWORD=devpassword \
+  -p 5432:5432 \
+  postgres:15-alpine
+​```
+
+In your `.env`, set `POSTGRES_HOST=localhost` and `POSTGRES_PASSWORD=devpassword`.
+
 Apply database migrations:
 
 ```bash
