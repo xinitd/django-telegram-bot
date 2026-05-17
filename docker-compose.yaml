@@ -3,44 +3,48 @@ services:
   database:
     image: postgres:15-alpine
     container_name: database
+    restart: unless-stopped
+    env_file: .env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_HOST: database
-      POSTGRES_DB: django_telegram_bot
-      POSTGRES_USER: bot
-      POSTGRES_PASSWORD: password
-    env_file: .env
     networks:
       - internal_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   backend:
     container_name: backend
+    restart: unless-stopped
     build:
       context: .
     expose:
       - '8000'
     env_file: .env
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     networks:
       - internal_network
     volumes:
-      - ./staticfiles:/app/staticfiles
+      - staticfiles:/app/staticfiles
 
   webserver:
     container_name: webserver
-    image: nginx
+    image: nginx:1.27-alpine
+    restart: unless-stopped
     env_file: .env
     depends_on:
       - backend
     networks:
       - internal_network
     volumes:
-      - ./nginx/templates:/etc/nginx/templates
-      - ./nginx/certs:/etc/letsencrypt
+      - ./nginx/templates:/etc/nginx/templates:ro
+      - ./nginx/certs:/etc/letsencrypt:ro
       - ./nginx/certbot/www:/var/www/certbot
-      - ./staticfiles:/var/www/static/
+      - staticfiles:/var/www/static/:ro
     ports:
       - '80:80'
       - '443:443'
@@ -48,10 +52,7 @@ services:
 
 networks:
   internal_network:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.18.0.0/16
 
 volumes:
   postgres_data:
+  staticfiles:
