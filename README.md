@@ -90,69 +90,64 @@ python manage.py bot
 Send `/start` to your bot in Telegram - it should reply immediately. If nothing happens, double-check `TELEGRAM_TOKEN` and that the bot is started (not paused) in @BotFather.
 
 ---
-<div align="center">
-  <h2>PRODUCTION</h2>
-</div>
 
-This guide provides an automated way to deploy the bot using Docker, PostgreSQL, Nginx, and Let's Encrypt for SSL.
+## PRODUCTION
 
-1. Prerequisites:
+Deploy the bot to a VPS with **Docker, PostgreSQL, Nginx and a free Let's Encrypt SSL certificate** - all configured automatically by a single shell script. Telegram requires HTTPS for webhooks, so SSL is not optional; the included `install.sh` handles certificate issuance and renewal for you.
 
-    - A server (VPS) with a clean OS (e.g., Ubuntu 22.04).
+### Prerequisites
 
-    - A domain name pointing to your server's IP address.
+- A VPS with a clean OS - Ubuntu 22.04 LTS is tested and recommended.
+- A domain name with an `A` record pointing to your server's public IP (e.g. `bot.yourdomain.com → 1.2.3.4`). DNS must propagate before running the installer.
+- Root or `sudo` access on the server.
 
-2. Installation:
+### 1. Clone the repository
 
-    - Clone the project:
+```bash
+git clone https://github.com/xinitd/django-telegram-bot.git
+cd django-telegram-bot
+```
 
-      ```
-      git clone https://github.com/xinitd/django-telegram-bot.git
-      cd django-telegram-bot
-      ```
+### 2. Configure environment variables
 
-    - Create and edit your environment file:
+```bash
+cp .env.template .env
+nano .env
+```
 
-      ```
-      cp .env.template .env
-      nano .env
-      ```
+Fill in every variable:
 
-      *Fill in all variables: DOMAIN_NAME, ADMIN_EMAIL, SECRET_KEY, etc. Set DEBUG=False.*
+- `DOMAIN_NAME` - your full domain, e.g. `bot.yourdomain.com`
+- `ADMIN_EMAIL` - used by Let's Encrypt for certificate expiration warnings
+- `SECRET_KEY` - Django secret key (generate with `python3 -c "import secrets; print(secrets.token_urlsafe(50))"`)
+- `TELEGRAM_TOKEN` - bot token from [@BotFather](https://t.me/BotFather)
+- `DEBUG=False` - **must be `False` in production**
 
-    - Run the installer:
+### 3. Run the installer
 
-      ```
-      chmod +x install.sh
-      sudo ./install.sh
-      ```
+```bash
+chmod +x install.sh
+sudo ./install.sh
+```
 
-    - Apply database migrations:
-    
-      ```
-      docker compose exec backend python manage.py migrate
-      ```
+The script installs Docker, brings up the `backend`, `db` and `nginx` containers, and issues an SSL certificate via Let's Encrypt.
 
-    - Create a superuser:
+### 4. Initialize the Django backend
 
-      ```
-      docker compose exec backend python manage.py createsuperuser
-      ```
+```bash
+docker compose exec backend python manage.py migrate
+docker compose exec backend python manage.py createsuperuser
+docker compose exec backend python manage.py collectstatic --no-input
+```
 
-    - Collect static files:
+### 5. Register the Telegram webhook
 
-      ```
-      docker compose exec backend python manage.py collectstatic --no-input
-      ```
+1. Open `https://your-domain.com/admin/` and log in with the superuser you just created.
+2. Go to **Sites** in the admin sidebar.
+3. Click `example.com`, change the **Domain name** field to your real domain (e.g. `bot.yourdomain.com`), and save.
+4. Return to the Sites list, tick the checkbox next to your site, choose **Set Telegram webhook** from the *Action* dropdown and click **Go**.
+5. *(Optional)* Run **Get webhook info** from the same dropdown to verify Telegram is sending updates to your server.
 
- 3. Final setup:
+Send `/start` to your bot - you should get an instant reply, this time over webhooks instead of polling.
 
-    1. Open in browser `https://your-domain.com/admin/` and log in.
-
-    2. Navigate to the **Sites** section.
-
-    3. Click on `example.com`, change the **Domain name** to your actual domain (e.g., `bot.mydomain.com`), and save.
-
-    4. Return to the Sites list, check the box next to your site, and select the **Set Telegram webhook** action from the dropdown. Click "Go".
-
-    5. **(Optional)** Use the **Get webhook info** action to verify that everything is working correctly.
+---
