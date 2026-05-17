@@ -122,6 +122,7 @@ Fill in every variable:
 - `SECRET_KEY` - Django secret key (generate with `python3 -c "import secrets; print(secrets.token_urlsafe(50))"`)
 - `TELEGRAM_TOKEN` - bot token from [@BotFather](https://t.me/BotFather)
 - `DEBUG=False` - **must be `False` in production**
+- `POSTGRES_PASSWORD` - PostgreSQL password (any strong random string - same generator works: `python3 -c "import secrets; print(secrets.token_urlsafe(32))"`)
 
 ### 3. Run the installer
 
