@@ -77,14 +77,14 @@ Open `.env` and fill in:
 
 Start a local PostgreSQL container in a separate terminal:
 
-​```bash
+```bash
 docker run -d --name postgres-dev \
   -e POSTGRES_DB=django_telegram_bot \
   -e POSTGRES_USER=bot \
   -e POSTGRES_PASSWORD=devpassword \
   -p 5432:5432 \
   postgres:15-alpine
-​```
+```
 
 Apply database migrations:
 
