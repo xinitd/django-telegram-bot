@@ -32,11 +32,17 @@ Django brings a powerful admin panel and a battle-tested ORM out of the box. Her
 ### Features
 
 - **Webhook-first architecture** - no polling, no extra daemons. Telegram updates arrive as standard Django requests.
-- **Django Admin integration** - set, inspect and delete the Telegram webhook from a dropdown action.
+- **Secure webhook management** - register, inspect and delete the Telegram webhook from the Django admin, behind authentication. No public setWebhook endpoint, no token in URLs.
 - **One-command deployment** - `install.sh` provisions Docker, PostgreSQL, Nginx and a Let's Encrypt SSL certificate.
 - **Modular handler architecture** - each command lives in its own module and is auto-registered.
 - **Production-ready by default** - separate Dockerfile, `.env`-driven config, static via `collectstatic`, HTTPS-only.
 - **DEV mode included** - switch to long polling locally with `python manage.py bot` without touching production setup.
+
+### Why webhook setup lives in Django admin
+
+In many Django + Telegram bot tutorials, `setWebhook` is called from a URL view, a management command, or - worst - hardcoded into project startup. Each of these leaves a way for an attacker who reaches the server to redirect Telegram updates to their own endpoint, effectively hijacking the bot.
+
+Here the webhook is registered through a **Django admin action**, behind authentication and CSRF protection. There's no public URL to call, no token-in-URL trick, no command that can be triggered by a stray cron job. The only way to change the webhook is to log in as a superuser.
 
 ## DEV
 
